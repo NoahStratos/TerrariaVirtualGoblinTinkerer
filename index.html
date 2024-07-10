@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="Terraria, Reforge, Simulator">
+    <title>Terraria Virtual Goblin Tinkerer (Reforge Simulator)</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<p id="heading">Terraria Virtual Goblin Tinkerer</p>
+<br><br>
+<section>
+<form>
+  Item Name:
+  <input type="text" id="itemname" size="40" maxlength="64" placeholder="Blue Moon">
+  <br>
+  Item Type:
+  <select id="itemtype">
+    <option value="wuniv">Flail</option>
+    <option value="wuniv">Yoyo</option>
+    <option value="wuniv">Spear</option>
+    <option value="wuniv">Boomerang</option>
+    <option value="wuniv">Throwing Item</option>
+    <option value="wuniv">Chainsaw</option>
+    <option value="wuniv">Drill</option>
+    <option value="wuniv">Jackhammer</option>
+    <option value="wuniv">Dagger</option>
+    <option value="wuniv">Knife</option>
+    <option value="wmelee">Axe</option>
+    <option value="wmelee">Pickaxe</option>
+    <option value="wmelee">Shovel</option>
+    <option value="wmelee">Hoe</option>
+    <option value="wmelee">Scythe</option>
+    <option value="wmelee">Sickle</option>
+    <option value="wmelee">Claw</option>
+    <option value="wmelee">Club</option>
+    <option value="wmelee">Dagger</option>
+    <option value="wmelee">Hamaxe</option>
+    <option value="wmelee">Sword</option>
+    <option value="wmelee">Whip</option>
+    <option value="wranged">Firearm</option>
+    <option value="wranged">Bow</option>
+    <option value="wranged">Crossbow</option>
+    <option value="wranged">Repeater</option>
+    <option value="wranged">Rocket Launcher</option>
+    <option value="wranged">Grenade Launcher</option>
+    <option value="wmagic">Staff</option>
+    <option value="wmagic">Wand</option>
+    <option value="wmagic">Magic Tome/Book</option>
+    <option value="wmagic">Magic Firearm</option>
+    <option value="wmagic">Laser Firearm</option>
+    <option value="wuniv">Generic Universal Only</option>
+    <option value="wmelee">Generic Melee</option>
+    <option value="wranged">Generic Ranged</option>
+    <option value="wmagic">Generic Magic</option>
+    <option value="iaccs">Accessory</option>
+  </select>
+</form>
+<button onclick="Reforged()">Reforge</button>
+<audio id="sound">
+  <source src='tinkerer.mp3' type='audio/mpeg'>.
+</audio>
+</section>
+<br>
+<p id="result"></p>
+<br>
+<p id="description">A small app that emulates the Reforge and Modifier<br> mechanics of the sandbox game Terraria, made by Re-Logic. This site<br> is currently very rudimentary and does not contain much. <br>Would like to implement a reforge history, images, a background, and a <br>value change indication in a percentage.<br><b>Version Alpha v0.4 - leafsaber47</b></p>
+<script>
+    var pool1 = ["Keen", "Superior", "Forceful", "Broken", "Damaged", "Shoddy", "Hurtful", "Strong", "Unpleasant", "Weak", "Ruthless", "Godly", "Demonic", "Zealous"];
+    var pool2 = ["Keen", "Superior", "Forceful", "Broken", "Damaged", "Shoddy", "Hurtful", "Strong", "Unpleasant", "Weak", "Ruthless", "Godly", "Demonic", "Zealous", "Quick", "Deadly", "Agile", "Nimble", "Murderous", "Slow", "Sluggish", "Lazy", "Annoying", "Nasty", "Large", "Massive", "Dangerous", "Savage", "Sharp", "Pointy", "Tiny", "Terrible", "Small", "Dull", "Unhappy", "Bulky", "Shameful", "Heavy", "Light", "Legendary"];
+    var pool3 = ["Keen", "Superior", "Forceful", "Broken", "Damaged", "Shoddy", "Hurtful", "Strong", "Unpleasant", "Weak", "Ruthless", "Godly", "Demonic", "Zealous", "Quick", "Agile", "Nimble", "Murderous", "Slow", "Sluggish", "Lazy", "Annoying", "Nasty", "Sighted", "Rapid", "Hasty", "Intimidating", "Deadly", "Staunch", "Awful", "Lethargic", "Awkward", "Powerful", "Frenzying", "Unreal"];
+    var pool4 = ["Keen", "Superior", "Forceful", "Broken", "Damaged", "Shoddy", "Hurtful", "Strong", "Unpleasant", "Weak", "Ruthless", "Godly", "Demonic", "Zealous", "Quick", "Deadly", "Agile", "Nimble", "Murderous", "Slow", "Sluggish", "Lazy", "Annoying", "Nasty", "Mystic", "Adept", "Masterful", "Inept", "Ignorant", "Deranged", "Intense", "Taboo", "Celestial", "Furious", "Manic", "Mythical"];
+    var pool5 = ["Hard", "Guarding", "Armored", "Warding", "Arcane", "Precise", "Lucky", "Jagged", "Spiked", "Angry", "Menacing", "Brisk", "Fleeting", "Hasty", "Quick", "Wild", "Rash", "Intrepid", "Violent"];
+    var text = "";
+    var prefix = "";
+    var s = document.getElementById("sound");
+    function Reforged() {
+    var item = document.getElementById("itemname");
+    var name = item.value;
+    s.load();
+    s.play();
+    if (document.getElementById("itemtype").value == "wuniv")
+    {
+        prefix = pool1[Math.floor(Math.random()*pool1.length)];
+    }
+    if (document.getElementById("itemtype").value == "wmelee")
+    {
+        prefix = pool2[Math.floor(Math.random()*pool2.length)];
+    }
+        if (document.getElementById("itemtype").value == "wranged")
+    {
+        prefix = pool3[Math.floor(Math.random()*pool3.length)];
+    }
+    if (document.getElementById("itemtype").value == "wmagic")
+    {
+        prefix = pool4[Math.floor(Math.random()*pool4.length)];
+    }
+    if (document.getElementById("itemtype").value == "iaccs")
+    {
+        prefix = pool5[Math.floor(Math.random()*pool5.length)];
+    }
+    document.getElementById("result").innerHTML = prefix + " " + name;
+}
+</script>
+</body>
+</html>
